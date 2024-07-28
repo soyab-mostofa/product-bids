@@ -12,10 +12,12 @@ const ItemCard = (item: ItemCardProps) => {
       key={item.id}
       className="border border-gray-200 rounded-lg p-4 space-y-2"
     >
-      <p className="text-xl font-semibold ">{item.name}</p>
+      <p className="text-xl font-semibold">{item.name}</p>
       <p>
         Starting Bid:{" "}
-        <span className="text-2xl text-yellow-300"> {item.startingBid}$</span>
+        <span className="font-bold text-green-500 ">
+          {item.startingBid || "0"}$
+        </span>
       </p>
     </div>
   );
