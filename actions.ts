@@ -2,13 +2,19 @@
 import { db } from "@/db/database";
 import { userTable } from "./db/schema";
 import { eq } from "drizzle-orm";
-import { User } from "@clerk/nextjs/server";
-export const getUser = async (loggedUser: User) => {
-  const dbUser = db
-    ?.select()
-    .from(userTable)
-    .where(eq(userTable.id, loggedUser.id));
 
-  console.log(dbUser);
-  return { success: true, error: null };
-};
+export async function createDBUser(userData: { id: string; email: string }) {
+  try {
+    const createdUser = await db.insert(userTable).values({
+      id: userData.id,
+      email: userData.email,
+    });
+    if (!createdUser) {
+      throw new Error("Failed to create user");
+    }
+
+    console.log("User data inserted successfully");
+  } catch (error) {
+    console.error("Error inserting user data:", error);
+  }
+}

@@ -3,16 +3,13 @@ import Image from "next/image";
 import { revalidatePath } from "next/cache";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SignInButton, SignOutButton } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/db/database";
-export default async function Home() {
-  const user = await currentUser();
+import { useUser } from "@clerk/nextjs";
 
+export default async function Home() {
   const bids = await db.select().from(bidsSchema);
   return (
     <div className="container mx-auto py-12">
-      <div>{user ? <SignOutButton /> : <SignInButton />}</div>
       <form
         action={async (FormData) => {
           "use server";
