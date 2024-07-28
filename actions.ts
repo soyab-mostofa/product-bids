@@ -4,6 +4,7 @@ import { itemsTable, userTable } from "./db/schema";
 import { eq } from "drizzle-orm";
 import { User, currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createDBUser(userData: {
   id: string;
@@ -29,28 +30,3 @@ export async function createDBUser(userData: {
     console.error("Error inserting user data:", error);
   }
 }
-
-export const createItem = async ({
-  name,
-  description,
-}: {
-  name: string;
-  description: string;
-}) => {
-  const user = await currentUser();
-
-  if (!user) {
-    throw new Error("User not found");
-  }
-
-  try {
-    await db.insert(itemsTable).values({
-      name: name,
-      description: description,
-      userId: user.id,
-    });
-    revalidatePath("/");
-  } catch (error) {
-    console.error("Error creating item:", error);
-  }
-};

@@ -26,7 +26,7 @@ export const itemsTable = pgTable("pb_items", {
   name: varchar("name", { length: 255 }).notNull(), // Name
   description: varchar("description", { length: 255 }), // Description
   imageUrl: varchar("image_url", { length: 255 }), // Image URL
-  price: varchar("price", { length: 255 }), // Price
+  startingBid: varchar("starting_bid", { length: 255 }), // Price
   quantity: varchar("quantity", { length: 255 }), // Quantity
   createdAt: timestamp("created_at").notNull().defaultNow(), // Created At
   updatedAt: timestamp("updated_at").notNull().defaultNow(), // Updated At

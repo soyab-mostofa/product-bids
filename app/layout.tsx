@@ -11,6 +11,7 @@ import {
 } from "@clerk/nextjs";
 import "./globals.css";
 import NavBar from "./NavBar";
+import { ThemeProvider } from "./theme-provider";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -28,14 +29,16 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body
-          className={cn(
-            "font-sans antialiased bg-zinc-700 text-neutral-50",
-            fontSans.variable
-          )}
-        >
-          <NavBar />
-          {children}
+        <body className={cn("font-sans antialiased", fontSans.variable)}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavBar />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
