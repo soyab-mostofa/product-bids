@@ -10,6 +10,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import "./globals.css";
+import NavBar from "./NavBar";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -29,19 +30,11 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={cn(
-            "min-h-screen flex flex-col justify-center items-center font-sans antialiased bg-zinc-700 text-neutral-50",
+            "font-sans antialiased bg-zinc-700 text-neutral-50",
             fontSans.variable
           )}
         >
-          {" "}
-          <header>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
+          <NavBar />
           {children}
         </body>
       </html>
