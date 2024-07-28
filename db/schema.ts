@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   boolean,
-  jsonb,
+  json,
   pgTable,
   serial,
   timestamp,
@@ -25,7 +25,7 @@ export const itemsTable = pgTable("pb_items", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(), // Name
   description: varchar("description", { length: 255 }), // Description
-  imageUrl: varchar("image_url", { length: 255 }), // Image URL
+  imageUrls: json("image_urls"), // Image URL
   startingBid: varchar("starting_bid", { length: 255 }), // Price
   quantity: varchar("quantity", { length: 255 }), // Quantity
   createdAt: timestamp("created_at").notNull().defaultNow(), // Created At

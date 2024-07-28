@@ -26,6 +26,7 @@ export default async function Home() {
               id={item.id}
               name={item.name}
               startingBid={item.startingBid}
+              imageUrls={item.imageUrls as string}
             />
           ))}
         </div>
